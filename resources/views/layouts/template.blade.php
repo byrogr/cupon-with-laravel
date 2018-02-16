@@ -23,16 +23,33 @@
                 </button>
                 <a class="navbar-brand" href="#">Cupón</a>
             </div>
+
+            <div class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="{{ route('index') }}">Oferta del día</a>
+                    </li>
+                    <li>
+                        <a href="#">Ofertas recientes</a>
+                    </li>
+                    <li>
+                        <a href="#">Mis ofertas</a>
+                    </li>
+                </ul>
+
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <select name="city" id="cboCities" class="form-control">
+                            <option value="">- Seleccione ciudad -</option>
+                            @foreach($cities as $city)
+                                <option value="{{ $city->id }}">{{ $city->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </form>
+            </div>
         </div>
     </nav>
-
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Hello, world!</h1>
-            <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
-        </div>
-    </div>
 
     <div class="container">
         <div class="row">
@@ -47,9 +64,6 @@
             <p class="pull-left">&copy; {{ date('Y') }} Cupón, Inc.</p>
 
             <ol class="breadcrumb pull-right">
-                <li>
-                    <a href="{{ route('page') }}">Portada</a>
-                </li>
                 <li>
                     <a href="{{ route('page', ['page' => 'contacto']) }}">Contacto</a>
                 </li>

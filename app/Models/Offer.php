@@ -23,6 +23,13 @@ class Offer extends Model
         'revised'
     ];
 
+    public $timestamps = false;
+
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = str_slug(strtolower($value));
+    }
+
     public function city()
     {
         return $this->belongsTo('App\Models\City');

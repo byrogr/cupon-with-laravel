@@ -15,4 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//-- Portada
+Route::get('/sitio/', 'Frontend\SiteController@index')->name('index');
+
+//-- Otras paginas
 Route::get('/sitio/{page?}', 'Frontend\SiteController@page')->name('page');

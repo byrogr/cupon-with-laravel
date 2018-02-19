@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//-- Portada
-Route::get('/sitio/', 'Frontend\SiteController@index')->name('index');
-
-//-- Otras paginas
-Route::get('/sitio/{page?}', 'Frontend\SiteController@page')->name('page');
+Route::group(['prefix' => 'sitio'], function() {
+	Route::get('/{ciudad?}', 'Frontend\SiteController@portada')->name('portada');
+	Route::get('/', 'Frontend\SiteController@portada')->name('_portada');
+	Route::get('/{ciudad}/ofertas/{oferta}', 'Frontend\SiteController@detalle')->name('detalle');
+	Route::get('/{ciudad}/recientes', 'Frontend\SiteController@recientes')->name('recientes');
+	Route::get('/{page?}', 'Frontend\SiteController@page')->name('page');
+});

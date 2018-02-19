@@ -1,32 +1,59 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Roger
- * Date: 16/02/2018
- * Time: 17:36
- */
 
 namespace App\Repositories;
 
+use Illuminate\Support\Facades\DB;
+use App\Repositories\AbstractRepository;
 use App\Models\Offer;
+use App\Models\City;
 
 class OfferRepository
 {
-    private $model;
-
     public function __construct(Offer $model)
     {
         $this->model = $model;
     }
 
-    public function getById($id)
+    public function findOfertasDelDia($ciudad)
     {
-        return $this->model->find($id);
+        return City::where('slug', $ciudad)
+                    ->first()
+                    ->offers()
+                    ->where('revised', true)
+                    ->orderBy('publication_date', 'desc')
+                    ->first();
     }
 
-    public function getByCity($idCity)
+    public function findOfertaDetalle($ciudad, $oferta)
     {
-        return $this->model->where('city_id', $idCity)->first();
+        return City::where('slug', $ciudad)
+                    ->first()
+                    ->offers()
+                    ->where('revised', true)
+                    ->where('slug', $oferta)
+                    ->orderBy('publication_date', 'desc')
+                    ->first();
+    }
+
+    public function findOfetasRelacionadas($ciudad)
+    {
+        return DB::table('offers as o')
+            ->select('o.name', 'o.slug', 'c.name as ciudad', 'c.slug as cityslug')
+            ->join('cities as c', 'c.id', '=', 'o.city_id')
+            ->where('o.revised', 1)
+            ->where('c.slug', '<>', $ciudad)
+            ->take(5)
+            ->get();
+    }
+
+    public function findOfertasRecientes($city_id)
+    {
+        return $this->model
+                    ->where('revised', true)
+                    ->where('city_id', $city_id)
+                    ->orderBy('publication_date', 'desc')
+                    ->take(5)
+                    ->get();
     }
 
 }

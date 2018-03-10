@@ -27,7 +27,7 @@ class SiteController extends Controller
     {
         $cities = $this->city->getAll();
         if (!$ciudad) {
-            $ciudad = 'port-shayna';
+            $ciudad = $this->getDefaultCity();
             return redirect()->route('portada', ['ciudad' => $ciudad]);
         }
         //dd($ciudad);
@@ -57,7 +57,7 @@ class SiteController extends Controller
     // {
     //     return redirect()->route('portada', ['ciudad' => $ciudad]);
     // }
-    // 
+    //
     public function ciudades()
     {
         $cities = $this->city->getAll();
@@ -67,5 +67,12 @@ class SiteController extends Controller
     {
         $view = 'frontend/' . $page;
         return response()->view($view);
+    }
+
+    private function getDefaultCity()
+    {
+        $city = $this->city->getById(1);
+        //dd($city);
+        return $city->slug;
     }
 }

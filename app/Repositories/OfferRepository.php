@@ -7,7 +7,7 @@ use App\Repositories\AbstractRepository;
 use App\Models\Offer;
 use App\Models\City;
 
-class OfferRepository
+class OfferRepository extends AbstractRepository
 {
     public function __construct(Offer $model)
     {

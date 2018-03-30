@@ -21,7 +21,8 @@ class SiteController extends Controller
     public function listaCiudades()
     {
         $cities = $this->city->getAll();
-        return response()->view('partials.cities-control', compact(['cities']));    }
+        return response()->view('partials.cities-control', compact(['cities']));
+    }
 
     public function portada($ciudad = null)
     {

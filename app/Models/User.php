@@ -44,6 +44,7 @@ class User extends Authenticatable
 
     public function offers()
     {
-        return $this->belongsToMany('App\Models\Offer')->using('App\Models\Sale');
+        return $this->belongsToMany('App\Models\Offer')
+                    ->using('App\Models\Sale');
     }
 }

@@ -42,6 +42,7 @@ class Offer extends Model
 
     public function users()
     {
-        return $this->belongsToMany('App\Models\User')->using('App\Models\Sale');
+        return $this->belongsToMany('App\Models\User')
+                    ->using('App\Models\Sale');
     }
 }

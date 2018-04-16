@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use Illuminate\Support\Facades\DB;
-use App\Repositories\AbstractRepository;
 use App\Models\Offer;
 use App\Models\City;
 

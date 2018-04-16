@@ -41,7 +41,7 @@
                             <a href="{{ route('portada') }}" class="nav-link">Oferta del día</a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">Ofertas recientes</a>
+                            <a href="{{ route('recientes', ['ciudad' => 'port-jacksonstad']) }}" class="nav-link">Ofertas recientes</a>
                         </li>
                         <li class="nav-item">
                             <a href="#" class="nav-link">Mis ofertas</a>

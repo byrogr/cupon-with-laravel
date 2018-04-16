@@ -2,7 +2,6 @@
 
 namespace App\Repositories;
 
-use App\Repositories\AbstractRepository;
 use App\Models\City;
 
 class CityRepository extends AbstractRepository

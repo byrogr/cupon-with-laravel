@@ -73,7 +73,6 @@ class SiteController extends Controller
     private function getDefaultCity()
     {
         $city = $this->city->getById(1);
-        //dd($city);
         return $city->slug;
     }
 }

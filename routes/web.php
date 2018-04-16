@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('portada');
 });
 
 Route::group(['prefix' => 'sitio'], function() {
@@ -21,4 +21,17 @@ Route::group(['prefix' => 'sitio'], function() {
 	Route::get('/{ciudad}/ofertas/{oferta}', 'Frontend\SiteController@detalle')->name('detalle');
 	Route::get('/{ciudad}/recientes', 'Frontend\SiteController@recientes')->name('recientes');
 	Route::get('/{page?}', 'Frontend\SiteController@page')->name('page');
+
+
+	Route::group(['prefix' => 'tiendas'], function() {
+        Route::post('/login', 'Backend\StoreController@login')->name('login.stores');
+        Route::post('/logout', 'Backend\StoreController@logout')->name('logout.stores');
+
+        Route::get('/{usuario}/panel', 'Backend\StoreController@dashboard')->name('dashboard.stores');
+    });
+
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

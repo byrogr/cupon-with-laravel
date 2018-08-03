@@ -2,21 +2,39 @@
 
 namespace App\Repositories;
 
-abstract class AbstractRepository
+use Illuminate\Database\Eloquent\Model;
+
+abstract class AbstractRepository implements RepositoryContract
 {
 	protected $model;
 
-	public function getAll()
+	public function __construct(Model $model)
+	{
+		$this->model = $model;
+	}
+
+	public function all()
 	{
 		return $this->model->all();
 	}
 
-	public function getById($id)
+	public function get($id)
 	{
-		$entity = $this->model->find($id);
-		if (!$entity) {
-			abort(404);
-		}
-		return $entity;
+		return $this->model->findOrFail($id);
+	}
+
+	public function create(array $data)
+	{
+		return $this->model->create($data);
+	}
+
+	public function update(array $data, $id)
+	{
+		return $this->model->findOrFail($id)->update($data);
+	}
+
+	public function delete($id)
+	{
+		return $this->model->findOrFail($id)->delete();
 	}
 }

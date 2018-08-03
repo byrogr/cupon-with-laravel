@@ -20,26 +20,24 @@ class SiteController extends Controller
 
     public function listaCiudades()
     {
-        $cities = $this->city->getAll();
+        $cities = $this->city->all();
         return response()->view('partials.cities-control', compact(['cities']));
     }
 
     public function portada($ciudad = null)
     {
-        $cities = $this->city->getAll();
+        $cities = $this->city->all();
         if (!$ciudad) {
             $ciudad = $this->getDefaultCity();
             return redirect()->route('portada', ['ciudad' => $ciudad]);
         }
-        //dd($ciudad);
-        $offer = $this->offer->findOfertasDelDia($ciudad);
-        //dd($offer);
-        return response()->view('frontend.index', compact(['offer', 'cities']));
+        $offers = $this->offer->findOfertasDelDia($ciudad);
+        return response()->view('frontend.index', compact(['offers', 'cities']));
     }
 
     public function detalle($ciudad, $oferta)
     {
-        $cities = $this->city->getAll();
+        $cities = $this->city->all();
         $offer = $this->offer->findOfertaDetalle($ciudad, $oferta);
         $related = $this->offer->findOfetasRelacionadas($ciudad);
         return response()->view('frontend.detail', compact(['offer', 'cities', 'related']));
@@ -47,7 +45,7 @@ class SiteController extends Controller
 
     public function recientes($ciudad)
     {
-        $cities = $this->city->getAll();
+        $cities = $this->city->all();
         $city = $this->city->findBySlug($ciudad);
         $cercanas = $this->city->findCiudadesCercanas($city->id);
         $recientes = $this->offer->findOfertasRecientes($city->id);
@@ -61,7 +59,7 @@ class SiteController extends Controller
     //
     public function ciudades()
     {
-        $cities = $this->city->getAll();
+        $cities = $this->city->all();
     }
 
     public function page($page = "")
@@ -72,7 +70,7 @@ class SiteController extends Controller
 
     private function getDefaultCity()
     {
-        $city = $this->city->getById(1);
+        $city = $this->city->get(1);
         return $city->slug;
     }
 }

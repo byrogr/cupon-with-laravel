@@ -1,21 +1,22 @@
 @extends('layouts.frontend')
 
 @section('content')
-    @component('components.offer-detail', ['offer' => $offer])
-    	<a href="{{ route('detalle', ['ciudad' => $offer->city->slug, 'oferta' => $offer->slug]) }}">{{ $offer->name }}</a>
+    @component('components.offer-list', ['offers' => $offers])
     @endcomponent
 @endsection
 
 @section('aside')
     @parent
-    <div class="row" style="margin-top: 20px;">
-        <div class="col-md-12">
-            <h3>Sobre nosotros</h3>
-            <p class="text-justify">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur harum, sequi
-                dolorum quae dicta placeat sit quos similique autem eligendi ex, praesentium veniam saepe ducimus,
-                repudiandae, dolore provident est! Quas.
-            </p>
-        </div><!-- end of .col -->
-    </div><!-- end of .row -->
+    <section id="nosotros">
+        <h2>Sobre nosotros</h2>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+        <p>
+            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+            nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+            reprehenderit in voluptate velit esse cillum dolore eu fugiat.
+        </p>
+    </section>
 @endsection

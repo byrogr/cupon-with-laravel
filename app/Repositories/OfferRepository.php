@@ -10,7 +10,7 @@ class OfferRepository extends AbstractRepository
 {
     public function __construct(Offer $model)
     {
-        $this->model = $model;
+        parent::__construct($model);
     }
 
     public function findOfertasDelDia($ciudad)
@@ -20,7 +20,7 @@ class OfferRepository extends AbstractRepository
                     ->offers()
                     ->where('revised', true)
                     ->orderBy('publication_date', 'desc')
-                    ->first();
+                    ->get();
     }
 
     public function findOfertaDetalle($ciudad, $oferta)
